@@ -1,0 +1,17 @@
+rm(list=ls())
+ls()
+# http://plantecology.syr.edu/fridley/bio793/lm.html
+
+dat = read.csv(file.choose()) #choose the treedata.csv dataset
+str(dat)
+
+lm1 = lm(cover~.,data=dat,subset=species=="Fagus grandifolia")
+lm1 = lm(cover~elev,data=dat,subset=species=="Fagus grandifolia")
+summary(lm1)[[4]]   # summary table only 
+summary.aov(lm1)  #ANOVA-type table
+confint(lm1)     # confidence intervals
+AIC(lm1)        # AIC value
+plot(lm1)
+lm2 = update(lm1,formula=sqrt(cover)~elev)   # updating the model
+
+plot(lm2)
